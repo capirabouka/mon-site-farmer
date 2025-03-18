@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Résonances Disloquées</title>
-    <style>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geo&display=swap">
-        <style>
-  h1 {
-    font-family: 'Geo', sans-serif;
-    font-weight: normal; /* ou bold si tu veux tester */
-  }
-</style>
 
+    <!-- Lien vers la police Geo de Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geo&display=swap">
+
+    <style>
+        /* Style du corps */
         body {
             margin: 0;
             height: 100vh;
@@ -28,10 +25,13 @@
             transition: filter 1s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
+        /* Style du titre */
         #title {
             font-size: 4rem;
             display: flex;
             gap: 5px;
+            font-family: 'Geo', sans-serif; /* Application de la police Geo */
+            font-weight: normal;
         }
 
         #title span {
@@ -42,7 +42,6 @@
             color: #000000;
             filter: blur(3px) brightness(0.5);
             text-shadow: 0 0 8px #8a8c99, 0 0 16px #7b6c9e, 0 0 32px #6b5e8f;
-            font-family: 'Playfair Display', serif;
             z-index: 1;
         }
 
@@ -67,9 +66,9 @@
             transform: translate(-50%, -50%);
             box-shadow: 0 0 20px white, 0 0 40px #e6e0d5;
         }
-
     </style>
 </head>
+
 <body>
     <div id="cursor-glow"></div>
     <h1 id="title"></h1>
