@@ -25,6 +25,7 @@
             font-size: 3rem;
             display: flex;
             gap: 5px;
+            cursor: pointer;
         }
 
         #title span {
@@ -62,19 +63,17 @@
         }
     </style>
 </head>
+
 <body>
     <div id="cursor-glow"></div>
-<h1 id="title"><a href="presentation.html">Résonances Disloquées</a></h1>
-</h1>
-
-
+    <h1 id="title"></h1>
 
     <script>
         const title = document.getElementById('title');
         const cursorGlow = document.getElementById('cursor-glow');
         const titleText = 'Résonances Disloquées';
 
-        // Crée des spans pour chaque lettre
+        // Crée des spans pour chaque lettre du titre
         titleText.split('').forEach(char => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? ' ' : char;
@@ -83,6 +82,12 @@
 
         const letters = Array.from(title.children);
 
+        // Rend tout le titre cliquable vers la page suivante
+        title.addEventListener('click', () => {
+            window.location.href = "presentation.html";
+        });
+
+        // Gère l'effet du curseur et les lettres qui explosent
         document.addEventListener('mousemove', (e) => {
             cursorGlow.style.left = `${e.pageX}px`;
             cursorGlow.style.top = `${e.pageY}px`;
@@ -110,55 +115,6 @@
             }
         });
     </script>
-<script>
-    const title = document.getElementById('title');
-    const cursorGlow = document.getElementById('cursor-glow');
-    const titleText = 'Résonances Disloquées';
-
-    // Crée des spans pour chaque lettre avec un lien intégré
-    titleText.split('').forEach(char => {
-        const span = document.createElement('span');
-        span.textContent = char === ' ' ? ' ' : char;
-        title.appendChild(span);
-    });
-
-    // Rend tout le titre cliquable vers une autre page
-    title.addEventListener('click', () => {
-        window.location.href = "page2.html";  // Change le lien ici
-    });
-
-    const letters = Array.from(title.children);
-
-    // Effet du titre
-    document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = `${e.pageX}px`;
-        cursorGlow.style.top = `${e.pageY}px`;
-
-        const rect = title.getBoundingClientRect();
-        const distance = Math.sqrt(
-            Math.pow(e.clientX - (rect.left + rect.width / 2), 2) +
-            Math.pow(e.clientY - (rect.top + rect.height / 2), 2)
-        );
-
-        if (distance < 200) {
-            document.body.classList.add('hovered');
-            letters.forEach((letter) => {
-                const randomX = (Math.random() - 0.5) * 1000;
-                const randomY = (Math.random() - 0.5) * 1000;
-                letter.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                setTimeout(() => {
-                    letter.classList.add('hovered');
-                    letter.style.transform = 'translate(0, 0)';
-                }, Math.random() * 1500);
-            });
-        } else {
-            document.body.classList.remove('hovered');
-            letters.forEach(letter => letter.classList.remove('hovered'));
-        }
-    });
-</script>
 
 </body>
-    <h1 id="title"></h1>
-
 </html>
