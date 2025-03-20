@@ -1,11 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Résonances Disloquées</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geo&display=swap">
+
     <style>
+        h1 {
+            font-family: 'Geo', sans-serif;
+            font-weight: normal;
+        }
+
         body {
             margin: 0;
             height: 100vh;
@@ -17,18 +24,24 @@
             font-family: 'Arial', sans-serif;
             position: relative;
             cursor: none;
-            filter: blur(4px);
-            transition: filter 0.5s ease;
+            filter: blur(3px);
+            transition: filter 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        #title {
+            font-size: 8rem; /* Titre plus gros */
+            display: flex;
+            gap: 5px;
         }
 
         #title span {
             display: inline-block;
             opacity: 0;
             transform: translate(0, 0);
-            transition: transform 0.8s ease, opacity 0.8s ease;
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.5s ease;
             color: #000000;
-            filter: blur(3px) brightness(0.6);
-            text-shadow: 0 0 10px #8a8c99, 0 0 20px #7b6c9e, 0 0 40px #6b5e8f;
+            filter: blur(3px) brightness(0.5);
+            text-shadow: 0 0 8px #8a8c99, 0 0 16px #7b6c9e, 0 0 32px #6b5e8f;
             font-family: 'Playfair Display', serif;
             z-index: 1;
         }
@@ -85,16 +98,16 @@
                 Math.pow(e.clientY - (rect.top + rect.height / 2), 2)
             );
 
-            if (distance < 100) {
+            if (distance < 300) { // Zone plus large
                 document.body.classList.add('hovered');
                 letters.forEach((letter) => {
-                    const randomX = (Math.random() - 0.5) * 200;
-                    const randomY = (Math.random() - 0.5) * 200;
+                    const randomX = (Math.random() - 0.5) * 1200; // Éparpillement plus large
+                    const randomY = (Math.random() - 0.5) * 1200;
                     letter.style.transform = `translate(${randomX}px, ${randomY}px)`;
                     setTimeout(() => {
                         letter.classList.add('hovered');
                         letter.style.transform = 'translate(0, 0)';
-                    }, Math.random() * 500);
+                    }, Math.random() * 1500);
                 });
             } else {
                 document.body.classList.remove('hovered');
