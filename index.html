@@ -15,26 +15,24 @@
             background: #d3d3d3;
             overflow: hidden;
             font-family: 'Arial', sans-serif;
+            position: relative;
             cursor: none;
+            filter: blur(3px);
+            transition: filter 1s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         #title {
-            font-size: 4rem; /* Titre plus gros */
-            text-align: center;
+            font-size: 4rem;
             color: #000;
+            text-align: center;
             font-family: 'Megrim', cursive;
             text-shadow: 0 0 8px #8a8c99, 0 0 16px #7b6c9e, 0 0 32px #6b5e8f;
-            transition: transform 0.5s ease, text-shadow 0.5s ease;
+            cursor: pointer;
         }
 
-        #title a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        #title a:hover {
-            transform: scale(1.2);
-            text-shadow: 0 0 50px #b0a9c5, 0 0 100px #a7a3ba, 0 0 150px #8a8c99;
+        #title:hover {
+            transform: scale(1.1);
+            transition: transform 0.5s ease;
         }
 
         #cursor-glow {
@@ -51,7 +49,7 @@
 </head>
 <body>
     <div id="cursor-glow"></div>
-    <h1 id="title"><a href="presentation.html">Résonances Disloquées</a></h1>
+    <h1 id="title" onclick="location.href='presentation.html';">Résonances Disloquées</h1>
 
     <script>
         const cursorGlow = document.getElementById('cursor-glow');
