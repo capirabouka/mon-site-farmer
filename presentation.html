@@ -1,37 +1,107 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation</title>
+    <title>Résonances Disloquées</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #d3d3d3;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            background: #d3d3d3;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            cursor: none;
+            filter: blur(4px);
+            transition: filter 0.5s ease;
         }
-        h1 {
-            font-size: 3rem;
-            color: #000;
+
+        #title span {
+            display: inline-block;
+            opacity: 0;
+            transform: translate(0, 0);
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            color: #000000;
+            filter: blur(3px) brightness(0.6);
+            text-shadow: 0 0 10px #8a8c99, 0 0 20px #7b6c9e, 0 0 40px #6b5e8f;
+            font-family: 'Playfair Display', serif;
+            z-index: 1;
         }
-        a {
-            display: block;
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: #555;
-            text-decoration: none;
+
+        body.hovered {
+            filter: blur(0);
         }
-        a:hover {
-            color: #000;
+
+        #title span.hovered {
+            opacity: 1;
+            transform: translate(0, 0);
+            filter: brightness(1.4) blur(0);
+            text-shadow: 0 0 50px #b0a9c5, 0 0 100px #a7a3ba, 0 0 150px #8a8c99;
         }
+
+        #cursor-glow {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px white, 0 0 40px #e6e0d5;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Bienvenue sur ma page de présentation</h1>
-    <a href="index.html">Retour à l'accueil</a>
+    <div id="cursor-glow"></div>
+    <h1 id="title"></h1>
+
+    <script>
+        const title = document.getElementById('title');
+        const cursorGlow = document.getElementById('cursor-glow');
+        const titleText = 'Résonances Disloquées';
+
+        // Crée des spans pour chaque lettre
+        titleText.split('').forEach(char => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? ' ' : char;
+            title.appendChild(span);
+        });
+
+        const letters = Array.from(title.children);
+
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = `${e.pageX}px`;
+            cursorGlow.style.top = `${e.pageY}px`;
+
+            const rect = title.getBoundingClientRect();
+            const distance = Math.sqrt(
+                Math.pow(e.clientX - (rect.left + rect.width / 2), 2) +
+                Math.pow(e.clientY - (rect.top + rect.height / 2), 2)
+            );
+
+            if (distance < 100) {
+                document.body.classList.add('hovered');
+                letters.forEach((letter) => {
+                    const randomX = (Math.random() - 0.5) * 200;
+                    const randomY = (Math.random() - 0.5) * 200;
+                    letter.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                    setTimeout(() => {
+                        letter.classList.add('hovered');
+                        letter.style.transform = 'translate(0, 0)';
+                    }, Math.random() * 500);
+                });
+            } else {
+                document.body.classList.remove('hovered');
+                letters.forEach(letter => letter.classList.remove('hovered'));
+            }
+        });
+    </script>
 </body>
 </html>
+
